@@ -1,7 +1,8 @@
 package org.hildabur;
 
+import org.hildabur.services.FileService;
 import org.hildabur.utils.ArgumentManager;
-import org.hildabur.utils.FileManager;
+import org.hildabur.utils.ArgumentStorage;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,8 +11,10 @@ public class Main {
 
     private static void start(String[] args) {
         ArgumentManager argumentManager = new ArgumentManager();
-        argumentManager.setFileManager(new FileManager());
+        argumentManager.setArgumentStorage(new ArgumentStorage());
         argumentManager.parseArguments(args);
         System.out.println(argumentManager);
+        FileService fileService = new FileService(argumentManager.getArgumentStorage());
+        fileService.createOutputFiles();
     }
 }

@@ -7,7 +7,7 @@ public class ArgumentManager {
     private boolean optionO;
     private boolean optionP;
     private boolean optionA;
-    private FileManager fileManager;
+    private ArgumentStorage argumentStorage;
 
     public ArgumentManager() {
         optionO = false;
@@ -27,7 +27,7 @@ public class ArgumentManager {
                     }
 
                     optionO = true;
-                    fileManager.setPathResultFiles(args[++i]);
+                    argumentStorage.setPathResultFiles(args[++i]);
                 }
                 case "-p", "-P" -> {
                     if(optionP) {
@@ -37,15 +37,19 @@ public class ArgumentManager {
                     }
 
                     optionP = true;
-                    fileManager.setPrefixFileName(args[++i]);
+                    argumentStorage.setPrefixFileName(args[++i]);
                 }
-                default -> fileManager.addSourceFile(args[i]);
+                default -> argumentStorage.addSourceFile(args[i]);
             }
         }
     }
 
-    public void setFileManager(FileManager fileManager) {
-        this.fileManager = fileManager;
+    public void setArgumentStorage(ArgumentStorage argumentStorage) {
+        this.argumentStorage = argumentStorage;
+    }
+
+    public ArgumentStorage getArgumentStorage() {
+        return argumentStorage;
     }
 
     @Override
@@ -53,7 +57,7 @@ public class ArgumentManager {
         return "ArgumentManager{" +
                 "optionO=" + optionO +
                 ", optionP=" + optionP +
-                ", optionA=" + optionA + '\''+  fileManager.toString() +
+                ", optionA=" + optionA + '\''+  argumentStorage.toString() +
                 '}';
     }
 }
