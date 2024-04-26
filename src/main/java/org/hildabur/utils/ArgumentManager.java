@@ -7,6 +7,7 @@ public class ArgumentManager {
     private boolean optionO;
     private boolean optionP;
     private boolean optionA;
+    private FileManager fileManager;
 
     public ArgumentManager() {
         optionO = false;
@@ -15,13 +16,44 @@ public class ArgumentManager {
     }
 
     public void parseArguments(String[] args) {
-        for (String s : args) {
-            switch (s) {
-                case "a", "A" -> optionA = true;
-                case "o", "O" -> optionO = true;
-                case "p", "P" -> optionP = true;
-                default -> System.err.println("Invalid argument");
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-a", "-A" -> optionA = true;
+                case "-o", "-O" -> {
+                    if(optionO) {
+                        Notificator.printErrorMessage("Option -o is already exists. Skipped");
+                        i++;
+                        continue;
+                    }
+
+                    optionO = true;
+                    fileManager.setPathResultFiles(args[++i]);
+                }
+                case "-p", "-P" -> {
+                    if(optionP) {
+                        Notificator.printErrorMessage("Option -p is already exists. Skipped");
+                        i++;
+                        continue;
+                    }
+
+                    optionP = true;
+                    fileManager.setPrefixFileName(args[++i]);
+                }
+                default -> fileManager.addSourceFile(args[i]);
             }
         }
+    }
+
+    public void setFileManager(FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
+    @Override
+    public String toString() {
+        return "ArgumentManager{" +
+                "optionO=" + optionO +
+                ", optionP=" + optionP +
+                ", optionA=" + optionA + '\''+  fileManager.toString() +
+                '}';
     }
 }
