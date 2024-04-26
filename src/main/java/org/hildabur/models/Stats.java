@@ -11,4 +11,16 @@ public abstract class Stats {
         numString = 0;
         numFloat = 0;
     }
+
+    public void incrementNumInt() {
+        numInt++;
+    }
+
+    public void incrementNumString() {
+        numString++;
+    }
+
+    public void incrementNumFloat() {
+        numFloat++;
+    }
 }

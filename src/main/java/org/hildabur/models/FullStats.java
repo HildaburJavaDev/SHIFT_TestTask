@@ -10,11 +10,11 @@ public class FullStats extends Stats {
 
     public FullStats() {
         super();
-        min = 0;
-        max = 0;
+        min = Long.MAX_VALUE;
+        max = Long.MIN_VALUE;
         sum = 0;
         avg = 0;
-        minLength = 0;
-        maxLength = 0;
+        minLength = Long.MAX_VALUE;
+        maxLength = Long.MIN_VALUE;
     }
 }

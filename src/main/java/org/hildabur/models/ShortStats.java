@@ -5,15 +5,4 @@ public class ShortStats extends Stats{
         super();
     }
 
-    public void incrementNumInt() {
-        setNumInt(getNumInt() + 1);
-    }
-
-    public void incrementNumString() {
-        setNumString(getNumString() + 1);
-    }
-
-    public void incrementNumFloat() {
-        setNumFloat(getNumFloat() + 1);
-    }
 }
