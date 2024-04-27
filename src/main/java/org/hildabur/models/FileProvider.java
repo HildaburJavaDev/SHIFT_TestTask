@@ -1,14 +1,15 @@
 package org.hildabur.models;
 
-import lombok.Getter;
+import lombok.Data;
 import org.hildabur.enums.TypesOfString;
-
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
-@Getter
+@Data
 public class FileProvider {
     private final String floatFilePath;
     private final String integersFilePath;
@@ -40,15 +41,19 @@ public class FileProvider {
         }
     }
 
-    public void setIntegersFileOutputStream(FileOutputStream integersFileOutputStream) {
-        this.integersFileOutputStream = integersFileOutputStream;
-    }
-
-    public void setFloatsFileOutputStream(FileOutputStream floatsFileOutputStream) {
-        this.floatsFileOutputStream = floatsFileOutputStream;
-    }
-
-    public void setStringsFileOutputStream(FileOutputStream stringsFileOutputStream) {
-        this.stringsFileOutputStream = stringsFileOutputStream;
+    public void writeToFile(TypesOfString typeOfString, boolean optionA, String str) throws IOException {
+        Path path;
+        switch (typeOfString) {
+            case INTEGER -> path = Path.of(integersFilePath);
+            case FLOAT -> path = Path.of(floatFilePath);
+            case STRING -> path = Path.of(stringsFilePath);
+            default -> {
+                return;
+            }
+        }
+        if (!optionA)
+            Files.write(path, new byte[0]);
+        Files.write(path, (str + System.lineSeparator()).getBytes(),
+                        StandardOpenOption.APPEND);
     }
 }

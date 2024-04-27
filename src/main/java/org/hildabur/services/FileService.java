@@ -8,6 +8,7 @@ import org.hildabur.utils.Notificator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.List;
 import java.util.Scanner;
@@ -36,11 +37,15 @@ public class FileService {
                 TypesOfString typeOfString = statsService.updateStats(str);
                 if (isNeedleToCreateFile(typeOfString, statsService)) {
                     fileProvider.createFile(typeOfString);
-//                    fileProvider.writeToFile(typeOfString, );
+                    fileProvider.writeToFile(typeOfString, argumentStorage.isOptionA(), str);
+                    continue;
                 }
+                fileProvider.writeToFile(typeOfString, true, str);
             }
         } catch (FileNotFoundException e) {
             System.out.printf("Файл \"%s\" не найден - пропускаем%n", file.getName());
+        } catch (IOException e) {
+            System.out.println("Ошибка записи в файл");
         }
     }
 
