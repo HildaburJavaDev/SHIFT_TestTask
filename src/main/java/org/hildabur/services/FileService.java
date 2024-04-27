@@ -2,6 +2,7 @@ package org.hildabur.services;
 
 import org.hildabur.enums.TypesOfString;
 import org.hildabur.middleware.FilesExistenceCheckerMiddleware;
+import org.hildabur.models.FileProvider;
 import org.hildabur.utils.ArgumentStorage;
 import org.hildabur.utils.Notificator;
 
@@ -19,34 +20,48 @@ public class FileService {
     }
 
     public void createOutputFiles() {
-        if (!FilesExistenceCheckerMiddleware.checkDirectory(argumentStorage.getPathResultFiles())) System.out.println("Не существует");
-//        String currentDirectory = System.getProperty("user.dir");
-//        System.out.println("Текущая директория: " + currentDirectory + "\n Ожидаемая " + currentDirectory + argumentStorage.getPathResultFiles());
+        if (!FilesExistenceCheckerMiddleware.checkDirectory(argumentStorage.getPathResultFiles()))
+            System.out.println("Не существует");
     }
 
-    public void calcStats(boolean optionS, boolean optionF, File file, StatsService statsService) {
-        readFile(statsService, file);
+    private void calcStats(File file, StatsService statsService, FileProvider fileProvider) {
+        readFile(statsService, file, fileProvider);
     }
 
-    public void readFile(StatsService statsService, File file) {
+    private void readFile(StatsService statsService, File file, FileProvider fileProvider) {
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
                 TypesOfString typeOfString = statsService.updateStats(str);
+                if (isNeedleToCreateFile(typeOfString, statsService)) {
+                    fileProvider.createFile(typeOfString);
+                }
             }
         } catch (FileNotFoundException e) {
+            System.out.println(String.format("Файл \"%s\" не найден - пропускаем", file.getName()));
         }
+    }
+
+    private boolean isNeedleToCreateFile(TypesOfString typeOfString, StatsService statsService) {
+        if ((typeOfString.equals(TypesOfString.INTEGER) && (statsService.integerStats.getCount() == 1))) {
+            return true;
+        } else if ((typeOfString.equals(TypesOfString.FLOAT)) && (statsService.floatStats.getCount() == 1)) {
+            return true;
+        } else if ((typeOfString.equals(TypesOfString.STRING)) && (statsService.stringStats.getCount() == 1)) {
+            return true;
+        }
+        return false;
     }
 
     public void openFiles(boolean optionS, boolean optionF) {
         StatsService statsService = new StatsService(optionS, optionF);
+        FileProvider fileProvider = new FileProvider(argumentStorage.getPathResultFiles(), argumentStorage.getPrefixFileName());
         List<String> files = argumentStorage.getSourceFiles();
         for (String filename : files) {
             try{
-//                System.out.println(filename);
                 File file = new File(filename);
-                calcStats(optionS, optionF, file, statsService);
+                calcStats(file, statsService, fileProvider);
             } catch (NullPointerException exception) {
                 Notificator.printErrorMessage("Нет файлов");
                 return;

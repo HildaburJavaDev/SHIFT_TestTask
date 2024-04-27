@@ -5,9 +5,9 @@ import org.hildabur.models.*;
 
 public class StatsService {
     public Stats stats;
-    private final NumericStats integerStats;
-    private final NumericStats floatStats;
-    private final StringStats stringStats;
+    protected final NumericStats integerStats;
+    protected final NumericStats floatStats;
+    protected final StringStats stringStats;
     public StatsService(boolean optionS, boolean optionF) {
         integerStats = new NumericStats();
         floatStats = new NumericStats();
