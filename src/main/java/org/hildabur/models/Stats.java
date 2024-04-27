@@ -15,4 +15,5 @@ public abstract class Stats {
     }
 
     public abstract String getFinalStats();
+
 }

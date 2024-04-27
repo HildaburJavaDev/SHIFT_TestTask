@@ -25,4 +25,14 @@ public class StringStats extends Stats {
         if (length > maxLength) maxLength = length;
         if (length < minLength) minLength = length;
     }
+
+    public String getShortStats() {
+        return "\n\tcount: " + count;
+    }
+
+    public String getFullStats() {
+        return "\n\tcount: " + count +
+                "\n\tminLength: " + minLength +
+                "\n\tmaxLength: " + maxLength;
+    }
 }
