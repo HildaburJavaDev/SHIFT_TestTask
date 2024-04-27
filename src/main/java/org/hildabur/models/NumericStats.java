@@ -1,5 +1,8 @@
 package org.hildabur.models;
 
+import lombok.Getter;
+
+@Getter
 public class NumericStats extends Stats {
 
     protected double min, max, sum, avg;
@@ -11,8 +14,13 @@ public class NumericStats extends Stats {
         avg = 0;
     }
 
+    @Override
+    public String getFinalStats() {
+        return null;
+    }
+
     public void updateStats(double num) {
-        incrementNumInt();
+        incrementCount();
         updateMinMax(num);
         calcSum(num);
     }

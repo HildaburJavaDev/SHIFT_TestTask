@@ -1,13 +1,22 @@
 package org.hildabur.models;
 
+import lombok.Getter;
+
+@Getter
 public class ShortStats extends Stats{
     NumericStats integersStats;
     NumericStats floatStats;
 
     StringStats stringStats;
-    public ShortStats() {
-        integersStats = new NumericStats();
-        floatStats = new NumericStats();
-        stringStats = new StringStats();
+    public ShortStats(NumericStats integersStats, NumericStats floatStats, StringStats stringStats) {
+        this.integersStats = integersStats;
+        this.floatStats = floatStats;
+        this.stringStats = stringStats;
     }
+
+    @Override
+    public String getFinalStats() {
+        return null;
+    }
+
 }

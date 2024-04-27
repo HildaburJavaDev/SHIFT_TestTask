@@ -1,5 +1,8 @@
 package org.hildabur.models;
 
+import lombok.Getter;
+
+@Getter
 public class StringStats extends Stats {
     private long minLength, maxLength;
     public StringStats() {
@@ -8,8 +11,13 @@ public class StringStats extends Stats {
         maxLength = Long.MIN_VALUE;
     }
 
+    @Override
+    public String getFinalStats() {
+        return null;
+    }
+
     public void updateStats(int length) {
-        count++;
+        incrementCount();
         updateMinMax(length);
     }
 

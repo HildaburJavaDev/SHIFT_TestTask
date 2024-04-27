@@ -1,16 +1,24 @@
 package org.hildabur.models;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
 public class FullStats extends Stats {
 
-    public FullStats() {
+    NumericStats integersStats;
+    NumericStats floatStats;
+
+    StringStats stringStats;
+    public FullStats(NumericStats integersStats, NumericStats floatStats, StringStats stringStats) {
+        this.integersStats = integersStats;
+        this.floatStats = floatStats;
+        this.stringStats = stringStats;
     }
 
-//    public String getFinalStats() {
-//        getIntegerStats() + "\n\tmin = " + min + "\n\tmax = " + max +
-//    }
+    @Override
+    public String getFinalStats() {
+        return "Full stats";
+    }
 }

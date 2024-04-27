@@ -10,7 +10,9 @@ public abstract class Stats {
         count = 0;
     }
 
-    public void incrementNumInt() {
+    public void incrementCount() {
         count++;
     }
+
+    public abstract String getFinalStats();
 }

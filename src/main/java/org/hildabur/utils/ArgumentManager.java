@@ -7,12 +7,16 @@ public class ArgumentManager {
     private boolean optionO;
     private boolean optionP;
     private boolean optionA;
+    private boolean optionS;
+    private boolean optionF;
     private ArgumentStorage argumentStorage;
 
     public ArgumentManager() {
         optionO = false;
         optionP = false;
         optionA = false;
+        optionS = false;
+        optionF = false;
     }
 
     public void parseArguments(String[] args) {
@@ -39,6 +43,22 @@ public class ArgumentManager {
                     optionP = true;
                     argumentStorage.setPrefixFileName(args[++i]);
                 }
+                case "-s", "-S" -> {
+                    if (optionS) {
+                        Notificator.printErrorMessage("Option -s is already exists. Skipped");
+                        i++;
+                        continue;
+                    }
+                    optionS = true;
+                }
+                case "-f", "-F" -> {
+                    if (optionF) {
+                        Notificator.printErrorMessage("Option -f is already exists. Skipped");
+                        i++;
+                        continue;
+                    }
+                    optionF = true;
+                }
                 default -> argumentStorage.addSourceFile(args[i]);
             }
         }
@@ -57,7 +77,10 @@ public class ArgumentManager {
         return "ArgumentManager{" +
                 "optionO=" + optionO +
                 ", optionP=" + optionP +
-                ", optionA=" + optionA + '\''+  argumentStorage.toString() +
+                ", optionA=" + optionA +
+                ", optionS=" + optionS +
+                ", optionF=" + optionF +
+                ", argumentStorage=" + argumentStorage +
                 '}';
     }
 }

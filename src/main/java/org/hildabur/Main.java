@@ -15,6 +15,7 @@ public class Main {
         argumentManager.parseArguments(args);
         System.out.println(argumentManager);
         FileService fileService = new FileService(argumentManager.getArgumentStorage());
-        fileService.createOutputFiles();
+//        fileService.createOutputFiles();
+        fileService.openFiles(argumentManager.isOptionS(), argumentManager.isOptionF());
     }
 }
