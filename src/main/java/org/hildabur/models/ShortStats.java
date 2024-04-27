@@ -16,7 +16,9 @@ public class ShortStats extends Stats{
 
     @Override
     public String getFinalStats() {
-        return null;
+        return "Integers: \n\tcount: " + integersStats.count
+                + "\nFloats: \n\tcount: " + floatStats.count
+                + "\nStrings: \n\tcount: " + stringStats.count;
     }
 
 }

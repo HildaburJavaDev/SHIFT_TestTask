@@ -1,4 +1,4 @@
-package org.hildabur.services;
+package org.hildabur.enums;
 
 public enum TypesOfString {
     INTEGER,

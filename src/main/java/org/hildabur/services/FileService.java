@@ -45,8 +45,8 @@ public class FileService {
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
                 statsService.updateStats(str);
-                System.out.println(statsService.getStringStats().getCount());
             }
+            System.out.println(statsService.getFinalStats());
         } catch (FileNotFoundException e) {
         }
     }

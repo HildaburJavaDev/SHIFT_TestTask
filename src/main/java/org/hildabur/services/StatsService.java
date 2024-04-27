@@ -1,5 +1,6 @@
 package org.hildabur.services;
 
+import org.hildabur.enums.TypesOfString;
 import org.hildabur.models.*;
 
 public class StatsService {
@@ -41,14 +42,14 @@ public class StatsService {
 
     private boolean isFloat(String str) {
         try{
-            Float.parseFloat(str);
+            Double.parseDouble(str);
             return true;
         } catch (NumberFormatException ex) {
             return false;
         }
     }
 
-    public StringStats getStringStats() {
-        return stringStats;
+    public String getFinalStats() {
+        return stats.getFinalStats();
     }
 }

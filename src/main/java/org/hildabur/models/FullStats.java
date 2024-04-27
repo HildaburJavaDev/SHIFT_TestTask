@@ -19,6 +19,8 @@ public class FullStats extends Stats {
 
     @Override
     public String getFinalStats() {
-        return "Full stats";
+        return "Integers: \n\tcount: " + integersStats.count
+                + "\nFloats: \n\tcount: " + floatStats.count
+                + "\nStrings: \n\tcount: " + stringStats.count;
     }
 }
