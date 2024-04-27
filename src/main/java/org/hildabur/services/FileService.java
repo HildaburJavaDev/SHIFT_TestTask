@@ -39,7 +39,7 @@ public class FileService {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println(String.format("Файл \"%s\" не найден - пропускаем", file.getName()));
+            System.out.printf("Файл \"%s\" не найден - пропускаем%n", file.getName());
         }
     }
 
@@ -48,10 +48,7 @@ public class FileService {
             return true;
         } else if ((typeOfString.equals(TypesOfString.FLOAT)) && (statsService.floatStats.getCount() == 1)) {
             return true;
-        } else if ((typeOfString.equals(TypesOfString.STRING)) && (statsService.stringStats.getCount() == 1)) {
-            return true;
-        }
-        return false;
+        } else return (typeOfString.equals(TypesOfString.STRING)) && (statsService.stringStats.getCount() == 1);
     }
 
     public void openFiles(boolean optionS, boolean optionF) {
