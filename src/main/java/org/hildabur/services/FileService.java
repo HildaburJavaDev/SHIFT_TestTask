@@ -36,6 +36,7 @@ public class FileService {
                 TypesOfString typeOfString = statsService.updateStats(str);
                 if (isNeedleToCreateFile(typeOfString, statsService)) {
                     fileProvider.createFile(typeOfString);
+//                    fileProvider.writeToFile(typeOfString, );
                 }
             }
         } catch (FileNotFoundException e) {
@@ -51,8 +52,8 @@ public class FileService {
         } else return (typeOfString.equals(TypesOfString.STRING)) && (statsService.stringStats.getCount() == 1);
     }
 
-    public void openFiles(boolean optionS, boolean optionF) {
-        StatsService statsService = new StatsService(optionS, optionF);
+    public void openFiles() {
+        StatsService statsService = new StatsService(argumentStorage.isOptionS(), argumentStorage.isOptionF());
         FileProvider fileProvider = new FileProvider(argumentStorage.getPathResultFiles(), argumentStorage.getPrefixFileName());
         List<String> files = argumentStorage.getSourceFiles();
         for (String filename : files) {

@@ -4,60 +4,49 @@ import lombok.Getter;
 
 @Getter
 public class ArgumentManager {
-    private boolean optionO;
-    private boolean optionP;
-    private boolean optionA;
-    private boolean optionS;
-    private boolean optionF;
     private ArgumentStorage argumentStorage;
 
-    public ArgumentManager() {
-        optionO = false;
-        optionP = false;
-        optionA = false;
-        optionS = false;
-        optionF = false;
-    }
+    public ArgumentManager() {}
 
     public void parseArguments(String[] args) {
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
-                case "-a", "-A" -> optionA = true;
+                case "-a", "-A" -> argumentStorage.setOptionA(true);
                 case "-o", "-O" -> {
-                    if(optionO) {
+                    if(argumentStorage.isOptionO()) {
                         Notificator.printErrorMessage("Option -o is already exists. Skipped");
                         i++;
                         continue;
                     }
 
-                    optionO = true;
+                    argumentStorage.setOptionO(true);
                     argumentStorage.setPathResultFiles(args[++i]);
                 }
                 case "-p", "-P" -> {
-                    if(optionP) {
+                    if(argumentStorage.isOptionP()) {
                         Notificator.printErrorMessage("Option -p is already exists. Skipped");
                         i++;
                         continue;
                     }
 
-                    optionP = true;
+                    argumentStorage.setOptionP(true);
                     argumentStorage.setPrefixFileName(args[++i]);
                 }
                 case "-s", "-S" -> {
-                    if (optionS) {
+                    if (argumentStorage.isOptionS()) {
                         Notificator.printErrorMessage("Option -s is already exists. Skipped");
                         i++;
                         continue;
                     }
-                    optionS = true;
+                    argumentStorage.setOptionS(true);
                 }
                 case "-f", "-F" -> {
-                    if (optionF) {
+                    if (argumentStorage.isOptionF()) {
                         Notificator.printErrorMessage("Option -f is already exists. Skipped");
                         i++;
                         continue;
                     }
-                    optionF = true;
+                    argumentStorage.setOptionF(true);
                 }
                 default -> argumentStorage.addSourceFile(args[i]);
             }
@@ -75,11 +64,6 @@ public class ArgumentManager {
     @Override
     public String toString() {
         return "ArgumentManager{" +
-                "optionO=" + optionO +
-                ", optionP=" + optionP +
-                ", optionA=" + optionA +
-                ", optionS=" + optionS +
-                ", optionF=" + optionF +
                 ", argumentStorage=" + argumentStorage +
                 '}';
     }

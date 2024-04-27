@@ -8,6 +8,11 @@ import java.util.List;
 
 @Data
 public class ArgumentStorage {
+    private boolean optionO;
+    private boolean optionA;
+    private boolean optionS;
+    private boolean optionF;
+    private boolean optionP;
     private String prefixFileName;
     private String pathResultFiles;
     private final List<String> sourceFiles;
@@ -17,6 +22,8 @@ public class ArgumentStorage {
         pathResultFiles = "";
         sourceFiles = new ArrayList<>();
     }
+
+
 
     public void addSourceFile(String filename) {
         sourceFiles.add(filename);
