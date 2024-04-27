@@ -51,6 +51,7 @@ public class FileProvider {
                 return;
             }
         }
+//        System.out.println(path.toString());
         if (!optionA)
             Files.write(path, new byte[0]);
         Files.write(path, (str + System.lineSeparator()).getBytes(),

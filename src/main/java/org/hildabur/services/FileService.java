@@ -43,9 +43,9 @@ public class FileService {
                 fileProvider.writeToFile(typeOfString, true, str);
             }
         } catch (FileNotFoundException e) {
-            System.out.printf("Файл \"%s\" не найден - пропускаем%n", file.getName());
+            System.err.printf("Файл \"%s\" не найден - пропускаем%n", file.getName());
         } catch (IOException e) {
-            System.out.println("Ошибка записи в файл");
+            System.err.println("Ошибка записи в файл");
         }
     }
 
