@@ -17,18 +17,20 @@ public class StatsService {
         else stats = null;
     }
 
-    public void updateStats(String str) {
+    public TypesOfString updateStats(String str) {
         TypesOfString typeOfString = detectTypeOfString(str);
         switch (typeOfString) {
             case STRING -> stringStats.updateStats(str.length());
             case INTEGER -> integerStats.updateStats(Double.parseDouble(str));
             case FLOAT -> floatStats.updateStats(Double.parseDouble(str));
         }
+        return typeOfString;
     }
     private TypesOfString detectTypeOfString(String str) {
         if (isInteger(str)) return TypesOfString.INTEGER;
         else if (isFloat(str)) return TypesOfString.FLOAT;
-        else return TypesOfString.STRING;
+        else if (str.length() != 0) return TypesOfString.STRING;
+        return TypesOfString.EMPTY_STRING;
     }
 
     private boolean isInteger(String str) {

@@ -1,5 +1,6 @@
 package org.hildabur.services;
 
+import org.hildabur.enums.TypesOfString;
 import org.hildabur.middleware.FilesExistenceCheckerMiddleware;
 import org.hildabur.utils.ArgumentStorage;
 import org.hildabur.utils.Notificator;
@@ -23,20 +24,8 @@ public class FileService {
 //        System.out.println("Текущая директория: " + currentDirectory + "\n Ожидаемая " + currentDirectory + argumentStorage.getPathResultFiles());
     }
 
-    public void calcStats(boolean optionS, boolean optionF, File file) {
-        StatsService statsService = new StatsService(optionS, optionF);
+    public void calcStats(boolean optionS, boolean optionF, File file, StatsService statsService) {
         readFile(statsService, file);
-//        try {
-//            Scanner myReader = new Scanner(myObj);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                System.out.println(data);
-//            }
-//            myReader.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
     }
 
     public void readFile(StatsService statsService, File file) {
@@ -44,20 +33,20 @@ public class FileService {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
-                statsService.updateStats(str);
+                TypesOfString typeOfString = statsService.updateStats(str);
             }
-            System.out.println(statsService.getFinalStats());
         } catch (FileNotFoundException e) {
         }
     }
 
     public void openFiles(boolean optionS, boolean optionF) {
+        StatsService statsService = new StatsService(optionS, optionF);
         List<String> files = argumentStorage.getSourceFiles();
         for (String filename : files) {
             try{
 //                System.out.println(filename);
                 File file = new File(filename);
-                calcStats(optionS, optionF, file);
+                calcStats(optionS, optionF, file, statsService);
             } catch (NullPointerException exception) {
                 Notificator.printErrorMessage("Нет файлов");
                 return;
@@ -67,5 +56,6 @@ public class FileService {
                 Notificator.printErrorMessage("Неправильный путь к файлу");
             }
         }
+        System.out.println(statsService.getFinalStats());
     }
 }
