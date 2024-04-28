@@ -31,8 +31,10 @@ public class StringStats extends Stats {
     }
 
     public String getFullStats() {
+        String minLengthString = minLength == Long.MAX_VALUE ? "Undefined" : String.valueOf(minLength);
+        String maxLengthString = maxLength == Long.MIN_VALUE ? "Undefined" : String.valueOf(maxLength);
         return "\n\tcount: " + count +
-                "\n\tminLength: " + minLength +
-                "\n\tmaxLength: " + maxLength;
+                "\n\tminLength: " + minLengthString +
+                "\n\tmaxLength: " + maxLengthString;
     }
 }
