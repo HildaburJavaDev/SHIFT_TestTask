@@ -45,16 +45,19 @@ public class NumericStats extends Stats {
 
     public String getFullStats() {
         calcAvg();
+        String minString = (min == Long.MAX_VALUE) ? "Undefined" : ((min == (long) min) ? String.valueOf((long) min) : String.valueOf(min));
+        String maxString = (max == Long.MIN_VALUE) ? "Undefined" : ((max == (long) max) ? String.valueOf((long) max) : String.valueOf(max));
+        String sumString = (count == 0) ? "Undefined" : ((sum == (long) sum) ? String.valueOf((long) sum) : String.valueOf(sum));
+        String avgString = (Double.isNaN(avg)) ? "Undefined" : ((avg == (long) avg) ? String.valueOf((long) avg) : String.valueOf(avg));
         return """
-                \n\tcount:\s""" + count +
+            \n\tcount:\s""" + count +
                 """
-                        \n\tmin:\s""" + ((min == (long) min) ? String.valueOf((long) min) : String.valueOf(min)) +
+                        \n\tmin:\s""" + minString +
                 """
-                        \n\tmax:\s""" + ((max == (long) max) ? String.valueOf((long) max) : String.valueOf(max)) +
+                        \n\tmax:\s""" + maxString +
                 """
-                        \n\tsum:\s""" + ((sum == (long) sum) ? String.valueOf((long) sum) : String.valueOf(sum)) +
+                        \n\tsum:\s""" + sumString +
                 """
-                        \n\tavg:\s""" + ((avg == (long) avg) ? String.valueOf((long) avg) : String.valueOf(avg));
-
+                        \n\tavg:\s""" + avgString;
     }
 }
