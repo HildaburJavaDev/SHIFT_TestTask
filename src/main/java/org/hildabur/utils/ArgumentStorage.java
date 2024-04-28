@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class ArgumentStorage {
+//    логические переменные - отметка о том, была ли встречена соответствующая опция в аргументах командной строки
     private boolean optionO;
     private boolean optionA;
     private boolean optionS;
@@ -23,8 +24,7 @@ public class ArgumentStorage {
         sourceFiles = new ArrayList<>();
     }
 
-
-
+//    добавляем файлы, в которых содержатся строки для фильтрации
     public void addSourceFile(String filename) {
         sourceFiles.add(filename);
     }

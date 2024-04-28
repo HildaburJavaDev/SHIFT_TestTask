@@ -3,14 +3,15 @@ package org.hildabur.models;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+// ведение полной статистики
 @EqualsAndHashCode(callSuper = true)
 @Getter
 public class FullStats extends Stats {
+// модели данных для статистики
+    private final NumericStats integersStats;
+    private final NumericStats floatStats;
 
-    NumericStats integersStats;
-    NumericStats floatStats;
-
-    StringStats stringStats;
+    private final StringStats stringStats;
     public FullStats(NumericStats integersStats, NumericStats floatStats, StringStats stringStats) {
         this.integersStats = integersStats;
         this.floatStats = floatStats;

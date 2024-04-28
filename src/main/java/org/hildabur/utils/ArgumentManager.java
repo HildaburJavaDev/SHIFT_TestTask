@@ -8,6 +8,7 @@ public class ArgumentManager {
 
     public ArgumentManager() {}
 
+//    парсим аргументы и сохраняем их в нужные поля argumentStorage
     public void parseArguments(String[] args) {
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {

@@ -3,6 +3,7 @@ package org.hildabur.services;
 import org.hildabur.enums.TypesOfString;
 import org.hildabur.models.*;
 
+// сервис, управляющий логикой ведения статистики
 public class StatsService {
     public Stats stats;
     protected final NumericStats integerStats;
@@ -12,11 +13,13 @@ public class StatsService {
         integerStats = new NumericStats();
         floatStats = new NumericStats();
         stringStats = new StringStats();
+//        определяем экземпляром какого класса должен быть объект stats - полной статистики или короткой
         if (optionF) stats = new FullStats(integerStats, floatStats, stringStats);
         else if (optionS) stats = new ShortStats(integerStats, floatStats, stringStats);
         else stats = null;
     }
 
+//    обновляем статистику для соответствующего типа данных
     public TypesOfString updateStats(String str) {
         TypesOfString typeOfString = detectTypeOfString(str);
         switch (typeOfString) {
@@ -26,6 +29,7 @@ public class StatsService {
         }
         return typeOfString;
     }
+//     определяем тип данных в строке, считанной из файла
     private TypesOfString detectTypeOfString(String str) {
         if (isInteger(str)) return TypesOfString.INTEGER;
         else if (isFloat(str)) return TypesOfString.FLOAT;
@@ -51,6 +55,7 @@ public class StatsService {
         }
     }
 
+//     метод для получения финальной статистики
     public String getFinalStats() {
         return stats.getFinalStats();
     }

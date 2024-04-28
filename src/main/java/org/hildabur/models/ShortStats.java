@@ -2,6 +2,7 @@ package org.hildabur.models;
 
 import lombok.Getter;
 
+// ведение короткой статистики (только количество считанных файлов)
 @Getter
 public class ShortStats extends Stats{
     NumericStats integersStats;

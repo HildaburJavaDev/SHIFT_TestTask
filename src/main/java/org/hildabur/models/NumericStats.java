@@ -2,6 +2,7 @@ package org.hildabur.models;
 
 import lombok.Getter;
 
+// модель для всех числовых типов (целых и вещественных)
 @Getter
 public class NumericStats extends Stats {
 
@@ -45,6 +46,7 @@ public class NumericStats extends Stats {
 
     public String getFullStats() {
         calcAvg();
+//        если значения у нас отсутствует данный тип данных в файле, то статистика для него не определена
         String minString = (min == Long.MAX_VALUE) ? "Undefined" : ((min == (long) min) ? String.valueOf((long) min) : String.valueOf(min));
         String maxString = (max == Long.MIN_VALUE) ? "Undefined" : ((max == (long) max) ? String.valueOf((long) max) : String.valueOf(max));
         String sumString = (count == 0) ? "Undefined" : ((sum == (long) sum) ? String.valueOf((long) sum) : String.valueOf(sum));

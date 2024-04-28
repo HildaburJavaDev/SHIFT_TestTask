@@ -2,6 +2,7 @@ package org.hildabur.models;
 
 import lombok.Getter;
 
+// ведение статистики для строк
 @Getter
 public class StringStats extends Stats {
     private long minLength, maxLength;
