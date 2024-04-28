@@ -31,8 +31,9 @@ public class FileService {
     }
 
     private void readFile(StatsService statsService, File file, FileProvider fileProvider) {
+        Scanner scanner = null;
         try {
-            Scanner scanner = new Scanner(file);
+            scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
 //                определяем, какой тип данных был только что считан из файла
@@ -50,6 +51,10 @@ public class FileService {
             Notificator.printErrorMessage(String.format("Файл \"%s\" не найден - пропускаем%n", file.getName()));
         } catch (IOException e) {
             Notificator.printErrorMessage("Ошибка записи в файл");
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
         }
     }
 
